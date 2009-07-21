@@ -13,13 +13,17 @@ module Whenever
       end
     
       def output
-        task
+        output = wrap_task(task)
       end
-      
+
     protected
       
       def path_required
         raise ArgumentError, "No path available; set :path, '/your/path' in your schedule file" if @path.blank?
+      end
+
+      def wrap_task(task)
+        task
       end
       
     end

@@ -4,8 +4,13 @@ module Whenever
 
       def output
         path_required
-        %Q(#{File.join(@path, 'script', 'runner')} -e #{@environment} #{task.inspect})
+        super
       end
+
+      protected
+        def wrap_task(task)
+         %Q(#{File.join(@path, 'script', 'runner')} -e #{@environment} #{task.inspect}) 
+        end
       
     end
   end

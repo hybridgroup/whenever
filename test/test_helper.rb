@@ -12,6 +12,11 @@ rescue LoadError
 end
 
 begin
+  require 'redgreen'
+rescue LoadError
+end
+
+begin
   require 'mocha'
 rescue LoadError
   warn 'To test Whenever you need the mocha gem:'
