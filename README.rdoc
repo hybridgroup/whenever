@@ -74,6 +74,20 @@ More examples on the wiki: http://wiki.github.com/javan/whenever/instructions-an
 
 And you'll see your schedule.rb converted to cron sytax
 
+== lockrun support
+
+Whenever can also protect your cron jobs from overrun using lockrun: http://unixwiz.net/tools/lockrun.html
+
+  set :path => '/my/rails_root'
+
+  every 3.hours do
+    rake "my:rake:task", :lockrun => true                            # uses the default lockfile, default.lockrun
+    command "/usr/bin/my_great_command", :lockrun => 'great_command' # uses great_command.lockrun
+  end
+
+
+Note: this requires path to be set, so it has somewhere to place the lockfile.
+
 == Capistrano integration
 
 In your "config/deploy.rb" file do something like:
