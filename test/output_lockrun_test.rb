@@ -15,7 +15,7 @@ class OutputLockrunTest < Test::Unit::TestCase
     end
 
     should "output the command wrapped by lockrun with the default lockfile" do
-      assert_match two_hours + %Q{ /usr/bin/env lockrun --lockfile=/some/directory/log/default.lockrun -- sh -c "blahblah"}, @output
+      assert_match two_hours + %Q{ /usr/bin/env lockrun --lockfile=/some/directory/log/default.lockrun -- sh -c 'blahblah'}, @output
     end
   end
 
@@ -30,10 +30,8 @@ class OutputLockrunTest < Test::Unit::TestCase
       file
     end
 
-    "cd #{@path} && RAILS_ENV=#{@environment} /usr/bin/env rake #{task}"
-
     should "output the command wrapped by lockrun with the default lockfile" do
-      assert_includes %Q{#{two_hours} /usr/bin/env lockrun --lockfile=/my/super/directory/log/default.lockrun -- sh -c "cd /my/super/directory && RAILS_ENV=production /usr/bin/env rake blahblah"}, @output
+      assert_includes %Q{#{two_hours} /usr/bin/env lockrun --lockfile=/my/super/directory/log/default.lockrun -- sh -c 'cd /my/super/directory && RAILS_ENV=production /usr/bin/env rake blahblah'}, @output
     end
   end
 
@@ -49,7 +47,7 @@ class OutputLockrunTest < Test::Unit::TestCase
     end
 
     should "output the command wrapped by lockrun with the default lockfile" do
-      assert_includes %Q{#{two_hours} /usr/bin/env lockrun --lockfile=/my/directory/log/default.lockrun -- sh -c "/my/directory/script/runner -e production \"blahblah\""}, @output
+      assert_includes %Q{#{two_hours} /usr/bin/env lockrun --lockfile=/my/directory/log/default.lockrun -- sh -c '/my/directory/script/runner -e production "blahblah"'}, @output
     end
   end
 
@@ -65,7 +63,7 @@ class OutputLockrunTest < Test::Unit::TestCase
     end
 
     should "output the command wrapped by lockrun with the zomg lockfile" do
-      assert_includes %Q{#{two_hours} /usr/bin/env lockrun --lockfile=/some/directory/log/zomg.lockrun -- sh -c "blahblah"}, @output
+      assert_includes %Q{#{two_hours} /usr/bin/env lockrun --lockfile=/some/directory/log/zomg.lockrun -- sh -c 'blahblah'}, @output
     end
   end
 
