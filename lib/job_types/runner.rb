@@ -9,7 +9,7 @@ module Whenever
 
       protected
         def wrap_task(task)
-         %Q(#{File.join(@path, 'script', 'runner')} -e #{@environment} #{task.inspect}) 
+          %Q(#{File.join(@path, 'script', 'runner')} -e #{@environment} #{task.inspect}) 
         end
       
     end

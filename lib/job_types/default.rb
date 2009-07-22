@@ -10,10 +10,16 @@ module Whenever
         @cron_log    = options[:cron_log]
         @environment = options[:environment] || :production
         @path        = options[:path] || Whenever.path
+        @lockrun     = options[:lockrun]
       end
     
       def output
         output = wrap_task(task)
+        if @lockrun
+          lockrunify output
+        else
+          output
+        end
       end
 
     protected
@@ -24,6 +30,18 @@ module Whenever
 
       def wrap_task(task)
         task
+      end
+
+      def lockrunify(output)
+        path_required
+        escaped_output = output
+        %Q{/usr/bin/env lockrun --lockfile=#{lockfile_path} -- sh -c "#{escaped_output}"}
+      end
+
+      def lockfile_path
+        path_required
+        filename_prefix = @lockrun == true ? "default" : @lockrun
+        "#{@path}/log/#{filename_prefix}.lockrun"
       end
       
     end

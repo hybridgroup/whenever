@@ -41,7 +41,7 @@ module Whenever
       options[:cron_log] ||= @cron_log unless options[:cron_log] === false
       options[:class]    ||= Whenever::Job::Default
       @jobs[@current_time_scope] ||= []
-      @jobs[@current_time_scope] << options[:class].new(@options.merge(:task => task).merge(options))
+      @jobs[@current_time_scope] << options[:class].new(@options.merge(:task => task, :path => @path).merge(options))
     end
     
     def runner(task, options = {})
