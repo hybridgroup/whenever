@@ -34,8 +34,7 @@ module Whenever
 
       def lockrunify(output)
         path_required
-        escaped_output = output
-        %Q{/usr/bin/env lockrun --lockfile=#{lockfile_path} -- sh -c "#{escaped_output}"}
+        %Q{/usr/bin/env lockrun --lockfile=#{lockfile_path} -- sh -c '#{output}'}
       end
 
       def lockfile_path
